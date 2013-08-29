@@ -2,7 +2,7 @@ package edu.uncc.mad.assignment1.parttwo;
 
 import java.util.Comparator;
 
-public class User implements Comparator<User>{
+public class User {
 	private String firstName, middleInitial, lastName;
 	private int age;
 	private String city, state;
@@ -23,17 +23,55 @@ public class User implements Comparator<User>{
 		state = userDetails[5];
 		
 	}
-
-	@Override
-	public int compare(User user1, User user2) {
-
-		if(user1.age > user2.age)
-			return -1;
-		else if(areUsersSame(user1, user2))
-			return 0;
-		else return 1;
-	}
 	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleInitial() {
+		return middleInitial;
+	}
+
+	public void setMiddleInitial(String middleInitial) {
+		this.middleInitial = middleInitial;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof User){
@@ -48,7 +86,7 @@ public class User implements Comparator<User>{
 		StringBuffer sb = new StringBuffer();
 		
 		sb.append(firstName).append(" ").append(middleInitial).append(". ").append(lastName);
-		sb.append("\nAge: ").append(age).append("\n").append(city).append(",").append(state).append("\n");
+		sb.append(" " + age).append(" " + city).append(",").append(state);
 		
 		return sb.toString();
 	}
