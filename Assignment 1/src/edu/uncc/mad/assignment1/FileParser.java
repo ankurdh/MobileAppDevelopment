@@ -92,4 +92,33 @@ public class FileParser {
 		
 		return userList;
 	}
+	
+	public static Map<String, List<String>> getContinentCountriesListFromFile(String fileName) throws FileNotFoundException{
+		Map<String, List<String>> continentCountriesList = new HashMap<String, List<String>>();
+		
+		setupFileScannerForFile(fileName);
+		
+		String line;
+		
+		try {
+			while((line = fileScanner.nextLine()) != null){
+				String [] splitLine = line.split(",");
+				
+				List<String> currentContinentList = continentCountriesList.get(splitLine[0]);
+				
+				if(currentContinentList == null)
+					currentContinentList = new ArrayList<String>();
+				
+				currentContinentList.add(splitLine[1]);
+				
+				continentCountriesList.put(splitLine[0], currentContinentList);
+			}
+		} catch (NoSuchElementException e) {
+			//don't do anything, could be EOF
+		} finally {
+			fileScanner.close();
+		}
+		
+		return continentCountriesList;
+	}
 }
