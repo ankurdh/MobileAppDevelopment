@@ -26,7 +26,7 @@ public class PartThree {
 			e.printStackTrace();
 		}
 		
-		StringBuffer sb = new StringBuffer();		
+		StringBuffer sb = new StringBuffer();
 		
 		for(String continent : continentCountriesMap.keySet()){
 			List<String> countriesList = continentCountriesMap.get(continent);

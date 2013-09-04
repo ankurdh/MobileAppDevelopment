@@ -1,3 +1,11 @@
+/**
+ * 
+ * Assignment# 1
+ * FileName: FileParser.java
+ * Authors: Ankur Huralikoppi, Vishwas Subramanian
+ *
+ */
+
 package edu.uncc.mad.assignment1;
 
 import java.io.File;

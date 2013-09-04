@@ -1,6 +1,12 @@
-package edu.uncc.mad.assignment1.parttwo;
+/**
+ * 
+ * Assignment# 1
+ * FileName: User.java
+ * Authors: Ankur Huralikoppi, Vishwas Subramanian
+ *
+ */
 
-import java.util.Comparator;
+package edu.uncc.mad.assignment1.parttwo;
 
 public class User {
 	private String firstName, middleInitial, lastName;
