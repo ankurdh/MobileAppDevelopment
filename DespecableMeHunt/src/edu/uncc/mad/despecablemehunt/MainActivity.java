@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Log.d("Ankur", "Clicked on image with id: " + v.getId());
+				Toast.makeText(getApplicationContext(), "Clicked on image with id: " + v.getId(), Toast.LENGTH_LONG).show();
 			}
 		});
 		
