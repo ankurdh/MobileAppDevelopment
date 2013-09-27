@@ -17,6 +17,7 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 
 	public final static String PHOTO_ACTIVITY_MODE = "PHOTO_ACTIVITY_MODE";
+	public final static String SLIDE_SHOW_MODE = "SLIDE_SHOW_MODE";
 	
 	private Button photosButton;
 	private Button slideShowButton;
