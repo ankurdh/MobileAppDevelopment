@@ -1,3 +1,8 @@
+/**
+ * Authors: Ankur Huralikoppi, Vishwas Subramanian
+ * Homework 4
+ */ 
+
 package edu.uncc.mad.homework4;
 
 import edu.uncc.mad.homework4.constants.PhotoActivityMode;
@@ -28,7 +33,6 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO invoke the Photo activity in the Photo show mode.
 				Intent intent = new Intent(getApplicationContext(), PhotoActivity.class);
 				intent.putExtra(PHOTO_ACTIVITY_MODE, PhotoActivityMode.PHOTO_MODE);		
 				
