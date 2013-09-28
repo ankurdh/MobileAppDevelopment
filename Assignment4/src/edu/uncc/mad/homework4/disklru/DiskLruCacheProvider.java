@@ -165,7 +165,7 @@ public class DiskLruCacheProvider {
 
 	    public void clearCache() {
 	        if ( BuildConfig.DEBUG ) {
-	            Log.d( "cache_test_DISK_", "disk cache CLEARED");
+	            Log.d( "Ankur", "disk cache CLEARED");
 	        }
 	        try {
 	            diskLruCache.delete();

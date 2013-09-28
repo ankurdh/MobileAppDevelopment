@@ -111,6 +111,8 @@ public class PhotoActivity extends Activity {
 					return false;
 				}
 			});
+		} else if (getIntent().getExtras().getInt(MainActivity.PHOTO_ACTIVITY_MODE) == PhotoActivityMode.SLIDE_SHOW_MODE){
+			
 		}
 	}
 

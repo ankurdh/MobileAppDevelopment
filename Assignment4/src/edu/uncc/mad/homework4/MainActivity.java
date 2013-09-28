@@ -30,13 +30,14 @@ public class MainActivity extends Activity {
 		photosButton = (Button) findViewById(R.id.photosButton);
 		slideShowButton = (Button) findViewById(R.id.slideShowButton);
 		
+		final Intent intent = new Intent(getApplicationContext(), PhotoActivity.class);
+		
 		photosButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(), PhotoActivity.class);
-				intent.putExtra(PHOTO_ACTIVITY_MODE, PhotoActivityMode.PHOTO_MODE);		
 				
+				intent.putExtra(PHOTO_ACTIVITY_MODE, PhotoActivityMode.PHOTO_MODE);		
 				startActivity(intent);
 			}
 		});
@@ -45,7 +46,9 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO invoke the Photo Activity in the Slide Show mode. 
+				
+				intent.putExtra(PHOTO_ACTIVITY_MODE, PhotoActivityMode.SLIDE_SHOW_MODE);		
+				startActivity(intent); 
 				
 			}
 		});
