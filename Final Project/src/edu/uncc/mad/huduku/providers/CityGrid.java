@@ -20,15 +20,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.util.Log;
 
-import com.citygrid.content.offers.CGOffersOffer;
-import com.citygrid.content.places.search.CGPlacesSearchLocation;
-import com.citygrid.content.reviews.CGReviewsSearchReview;
-
 public class CityGrid {
-	
-    private CGOffersOffer[] cgOffers = null;
-    private CGPlacesSearchLocation[] cgPlacesSearchLocation = null;
-    private CGReviewsSearchReview[] cgReviews = null;
     
     public String reviewsSearch(String restaurantId){
     	List<NameValuePair> urlParams = new ArrayList<NameValuePair>();

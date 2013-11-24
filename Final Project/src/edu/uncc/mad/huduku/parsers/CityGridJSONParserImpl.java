@@ -53,7 +53,24 @@ public class CityGridJSONParserImpl implements Parser {
 
 	@Override
 	public List<Review> getReviewsFrom(JSONObject restaurant) throws JSONException {
-		return null;
+		List<Review> reviews = new ArrayList<Review>();
+		JSONArray reviewsJSONArray = restaurant.getJSONObject("results").getJSONArray("reviews");
+		
+		for(int i = 0 ; i < reviewsJSONArray.length(); i ++){
+			JSONObject currentReview = reviewsJSONArray.getJSONObject(i);
+			Review review = new Review();
+			
+			review.setReviewRating(currentReview.getDouble("review_rating"));
+			review.setReviewText(currentReview.getString("review_text"));
+			review.setUserName(currentReview.getString("review_author"));
+			review.setAuthorURL(currentReview.getString("review_author_url"));
+			review.setTimePosted(0L);
+			
+			reviews.add(review);
+			
+		}
+		
+		return reviews;
 	}
 
 	@Override

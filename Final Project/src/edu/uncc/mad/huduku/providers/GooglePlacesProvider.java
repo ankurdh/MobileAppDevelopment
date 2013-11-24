@@ -81,9 +81,10 @@ public class GooglePlacesProvider {
 		
 		List<NameValuePair> urlParams = new ArrayList<NameValuePair>();
 		urlParams.add(new BasicNameValuePair("location", lat + "," + lon));
-		urlParams.add(new BasicNameValuePair("radius", "200"));
+//		urlParams.add(new BasicNameValuePair("radius", "200"));
 		urlParams.add(new BasicNameValuePair("sensor", "true"));
 		urlParams.add(new BasicNameValuePair("types", "restaurant"));
+		urlParams.add(new BasicNameValuePair("rankby", "distance"));
 		urlParams.add(new BasicNameValuePair("key", API_KEY));
 		
 		return getResultsFromURL(urlParams, "/maps/api/place/nearbysearch/json");

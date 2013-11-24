@@ -4,5 +4,6 @@
     <string name="app_name">CityGrid Basics</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="PINNED_PLACES_FILE_NAME">edu.uncc.mad.huduku.PINNED_PLACES_FILE_NAME</string>
 
 </resources>

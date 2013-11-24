@@ -21,10 +21,10 @@ import com.example.citygridbasics.R;
 
 import edu.uncc.mad.huduku.core.Restaurant;
 import edu.uncc.mad.huduku.observer.LocationChangeObserver;
-import edu.uncc.mad.huduku.observer.LocationObservable;
 import edu.uncc.mad.huduku.parsers.CityGridJSONParserImpl;
 import edu.uncc.mad.huduku.parsers.GooglePlacesJSONParserImpl;
 import edu.uncc.mad.huduku.parsers.YelpJSONParserImpl;
+import edu.uncc.mad.huduku.pinning.SharedPreferenceManager;
 import edu.uncc.mad.huduku.providers.CityGrid;
 import edu.uncc.mad.huduku.providers.GooglePlacesProvider;
 import edu.uncc.mad.huduku.providers.YelpBusinessProvider;
@@ -34,13 +34,24 @@ public class MainActivity extends Activity implements LocationChangeObserver {
 	
 	private Handler handler;
 	private ExecutorService es;
-	ProgressDialog dialog;
-	LocationObservable locationProvider;
+	
+	private ProgressDialog dialog;
+//	private LocationObservable locationProvider;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		/**
+		 * Initialize the Pinned places handler module
+		 */
+		SharedPreferenceManager.createInstance(getApplication(), getString(R.string.PINNED_PLACES_FILE_NAME));	
+		
+		/**
+		 * USAGE: 
+		 * SharedPreferenceManager manager = SharedPreferenceManager.getSharedPreferenceManager();
+		 */
 		
 		es = Executors.newFixedThreadPool(1);
 		
@@ -51,10 +62,10 @@ public class MainActivity extends Activity implements LocationChangeObserver {
 		handler = new Handler(new Callback(){
 
 			@Override
-			public boolean handleMessage(Message msg) {
+			synchronized public boolean handleMessage(Message msg) {
 				dialog.dismiss();
 				
-				ArrayList<Restaurant> restaurants = msg.getData().getParcelableArrayList("RESTAURANTS");
+//				ArrayList<Restaurant> restaurants = msg.getData().getParcelableArrayList("RESTAURANTS");
 				//((TextView)findViewById(R.id.restaurantsCount)).setText(restaurants.get(2).getDeals().get(0).getBuyUrl());
 				
 				return false;
@@ -78,8 +89,8 @@ public class MainActivity extends Activity implements LocationChangeObserver {
 	public void onLocationChanged(double latitude, double longitude) {
 		dialog.show();
 //		es.execute(new YelpProvider(handler, latitude, longitude));
-//		es.execute(new CityGridProvider(handler, latitude, longitude));
-		es.execute(new GoogleProvider(handler, latitude, longitude));
+		es.execute(new CityGridProvider(handler, latitude, longitude));
+//		es.execute(new GoogleProvider(handler, latitude, longitude));
 	}
 }
 
@@ -99,13 +110,24 @@ class CityGridProvider implements Runnable {
 	public void run(){
 		CityGrid cg = new CityGrid();
 		String restaurantsJSONString = cg.placesSearch(lat, lon);
+		CityGridJSONParserImpl parser = new CityGridJSONParserImpl(); 
+		List<Restaurant> restaurants = parser.getRestaurantsFrom(restaurantsJSONString);
 		
-		List<Restaurant> restaurants = new CityGridJSONParserImpl().getRestaurantsFrom(restaurantsJSONString);
+		for(Restaurant r: restaurants){
+			try {
+				r.setReviews(parser.getReviewsFrom(new JSONObject(cg.reviewsSearch(r.getId()))));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
 		
-		for(Restaurant r: restaurants)
-			Log.d("ankur", "CITYGRID - Name: " + r.getName());
+		Message msg = new Message();
+		Bundle bundle = new Bundle();
 		
-//		String p = cg.reviewsSearch("36711526");
+		bundle.putParcelableArrayList("RESTAURANTS", (ArrayList<Restaurant>) restaurants);
+		msg.setData(bundle);
+		
+		handler.sendMessage(msg);
 	}
 }
 
@@ -119,7 +141,6 @@ class YelpProvider implements Runnable {
 		this.handler = handler;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		
 	}
 
 	@Override
@@ -156,8 +177,7 @@ class GoogleProvider implements Runnable {
 	public GoogleProvider(Handler handler, double latitude, double longitude){
 		this.handler = handler;
 		this.latitude = latitude;
-		this.longitude = longitude;
-		
+		this.longitude = longitude;	
 	}
 
 	@Override
@@ -170,6 +190,7 @@ class GoogleProvider implements Runnable {
 		List<Restaurant> restaurants = googleJSONParser.getRestaurantsFrom(searchJSONResponse);
 				
 		for(Restaurant r: restaurants){
+			Log.d("ankur", "Google Restaurant: " + r.getName());
 			try {
 				r.setReviews(googleJSONParser.getReviewsFrom(new JSONObject(googlePlacesProvider.getGoogleRestaurantData(r.getId()))));
 			} catch (JSONException e) {
@@ -187,5 +208,3 @@ class GoogleProvider implements Runnable {
 		
 	}
 }
-
-

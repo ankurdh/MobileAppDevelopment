@@ -16,8 +16,9 @@ import edu.uncc.mad.huduku.core.Review;
 public class GooglePlacesJSONParserImpl implements Parser {
 
 	@Override
-	public List<Restaurant> getRestaurantsFrom(String JSON) {
+	public List<Restaurant> getRestaurantsFrom(String JSON) {		
 		
+		int parsedRestaurants = 0;
 		List<Restaurant> restaurants = new ArrayList<Restaurant>();
 		
 		try {
@@ -38,6 +39,9 @@ public class GooglePlacesJSONParserImpl implements Parser {
 						restaurant.setRating(currentRestaurantJSONObject.getDouble("rating"));
 					
 					restaurants.add(restaurant);
+					
+					if(++parsedRestaurants > 5)
+						break;
 					
 				}
 			} else {
@@ -64,19 +68,15 @@ public class GooglePlacesJSONParserImpl implements Parser {
 			
 			for(int j = 0 ; j < reviewAspects.length(); j ++){
 				JSONObject currentAspect = reviewAspects.getJSONObject(j);
-				String type = currentAspect.getString("type");
-				
-				if(type.equalsIgnoreCase("food"))
-					review.setFoodRating(currentAspect.getDouble("rating"));
-				else if(type.equalsIgnoreCase("decor"))
-					review.setDecorRating(currentAspect.getDouble("rating"));
-				else if(type.equalsIgnoreCase("service"))
-					review.setServiceRating(currentAspect.getDouble("rating"));
+				review.addRating(currentAspect.getString("type"), currentAspect.getDouble("rating"));
 			}
 			
 			review.setReviewRating(currentReview.getDouble("rating"));
 			review.setReviewText(currentReview.getString("text"));
-			review.setAuthorURL(currentReview.getString("author_url"));
+			
+			if(currentReview.has("author_url")) 
+				review.setAuthorURL(currentReview.getString("author_url"));
+			
 			review.setUserName(currentReview.getString("author_name"));
 			review.setTimePosted(currentReview.getLong("time"));
 			

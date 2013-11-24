@@ -1,36 +1,26 @@
 package edu.uncc.mad.huduku.core;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GooglePlacesReview extends Review {
 	
-	private double foodRating;
-	private double decorRating;
-	private double serviceRating;
+	private Map<String, Double> ratingsMap;
 	
 	public GooglePlacesReview(){
 		super();
+		ratingsMap = new HashMap<String, Double>();
 	}
 
-	public double getFoodRating() {
-		return foodRating;
+	public Map<String, Double> getRatingsMap() {
+		return ratingsMap;
 	}
 
-	public void setFoodRating(double foodRating) {
-		this.foodRating = foodRating;
+	public void setRatingsMap(Map<String, Double> ratingsMap) {
+		this.ratingsMap = ratingsMap;
 	}
-
-	public double getDecorRating() {
-		return decorRating;
-	}
-
-	public void setDecorRating(double decorRating) {
-		this.decorRating = decorRating;
-	}
-
-	public double getServiceRating() {
-		return serviceRating;
-	}
-
-	public void setServiceRating(double serviceRating) {
-		this.serviceRating = serviceRating;
+	
+	public void addRating(String type, Double rating){
+		ratingsMap.put(type, rating);
 	}
 }

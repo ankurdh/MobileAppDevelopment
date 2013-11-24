@@ -7,7 +7,6 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
 
-import edu.uncc.mad.huduku.YelpApi2;
 
 public class Yelp {
 	
