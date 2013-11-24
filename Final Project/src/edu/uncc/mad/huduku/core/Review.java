@@ -7,6 +7,7 @@ public class Review {
 	private long timePosted;
 	private String userName;
 	private String userImageUrl;
+	private String authorURL;
 	
 	public Review(){
 		
@@ -51,6 +52,12 @@ public class Review {
 	public void setUserImageUrl(String userImageUrl) {
 		this.userImageUrl = userImageUrl;
 	}
-	
-	
+
+	public String getAuthorURL() {
+		return authorURL;
+	}
+
+	public void setAuthorURL(String authorURL) {
+		this.authorURL = authorURL;
+	}
 }

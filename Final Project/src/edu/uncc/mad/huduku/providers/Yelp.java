@@ -47,9 +47,10 @@ public class Yelp {
 		
 		OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.yelp.com/v2/search");
 		request.addQuerystringParameter("term", term);
-		request.addQuerystringParameter("radius_filter", "200");
+		request.addQuerystringParameter("radius_filter", "3000");
 		request.addQuerystringParameter("ll", latitude + "," + longitude);
 		request.addQuerystringParameter("sort", "1");
+		request.addQuerystringParameter("limit", "10");
 		
 		this.service.signRequest(this.accessToken, request);
 		

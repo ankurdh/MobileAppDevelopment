@@ -5,5 +5,8 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="lib" path="C:/Users/Ankur/Utils/Acads/UNCC/Sem III/MAD/Project/External Jars/CityGrid/jackson-core-asl-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ankur/Utils/Acads/UNCC/Sem III/MAD/Project/External Jars/CityGrid/jackson-mapper-asl-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ankur/Utils/Acads/UNCC/Sem III/MAD/Project/External Jars/CityGrid/citygrid-2.3-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
