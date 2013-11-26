@@ -40,8 +40,4 @@
 
     <string name="title_activity_photo">Photos Activity</string>
 
-    <string name="xmlRadioString">XML</string>
-
-    <string name="jsonRadioString">JSON</string>
-
 </resources>

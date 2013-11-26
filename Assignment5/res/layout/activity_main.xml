@@ -41,26 +41,4 @@
             android:text="@string/slideShow" />
     </LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/formatRadioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal" >
-
-        <RadioButton
-            android:id="@+id/xmlRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/xmlRadioString" />
-
-        <RadioButton
-            android:id="@+id/jsonRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/jsonRadioString" />
-    </RadioGroup>
-
 </RelativeLayout>
