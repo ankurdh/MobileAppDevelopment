@@ -1,6 +1,6 @@
-ANDROID APPLICATION NAME - HUDKU
+HUDKU
 -----------------------------------------------------------------------------------
-HUDKU (means "Search" in Indian Language: Kannada)
+HUDKU (means "Search" in Indian Language: Kannada) is the name given to the coursework project for the Mobile Applications Development course. 
 
 APPLICATION CATEGORY
 -----------------------
