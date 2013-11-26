@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
 import edu.uncc.mad.huduku.core.Deal;
 import edu.uncc.mad.huduku.core.Restaurant;
 import edu.uncc.mad.huduku.core.Review;
@@ -63,16 +64,7 @@ public class YelpJSONParserImpl implements Parser {
 				restaurant.setName(restaurantJSONObject.getString("name"));
 				restaurant.setRating(restaurantJSONObject.getDouble("rating"));
 				
-				restaurants.add(restaurant);
-				
-				String restaurantBusinessJSONString = getBusinessResponse(restaurant.getId());
-				
-				if(restaurantBusinessJSONString == null)
-					continue;
-				
-				List<Review> reviews = getReviewsFrom(new JSONObject(restaurantBusinessJSONString));
-				restaurant.setReviews(reviews);
-				
+				restaurants.add(restaurant);				
 			}
 			
 		} catch (JSONException e) {
@@ -112,20 +104,17 @@ public class YelpJSONParserImpl implements Parser {
 			}
 			
 		} catch (JSONException e){
-			e.printStackTrace();
+			//e.printStackTrace();
+			try {
+				if(restaurant.has("name"))
+					Log.d("ankur", "No deals for restaurant: " + restaurant.getString("name"));
+			} catch (JSONException e1) {
+				//nothing much we can do. But the exception will not occur because of the "has" 
+				//method. 
+			}
 		}
 		
 		return deals;
 		
 	}
-
-	public String getBusinessResponse(String restaurantId) {
-
-		/**
-		 * TODO Invoke the web module here to get the required string. 
-		 */
-		
-		return null;
-	}
-
 }
